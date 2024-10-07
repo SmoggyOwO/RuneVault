@@ -10,7 +10,7 @@ function CustomInput() {
 	const [copyStatus, setCopyStatus] = useState(false);
 	const [inputValue, setInputValue] = useState(mnemonic);
 
-	const handleInputChange = (e) => {
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setInputValue(e.target.value);
 		updateMnemonic(e.target.value);
 	};

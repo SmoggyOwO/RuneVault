@@ -1,11 +1,11 @@
 import useGetMnemonic from "../hooks/useMnemonic";
 import { useState } from "react";
 
-function CustomWallet({ wallet }) {
+function CustomWallet({ wallet }: { wallet: string }) {
 	const seeds = useGetMnemonic((state) => state.seeds);
-	const [copiedIndex, setCopiedIndex] = useState(null);
+	const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
-	const copyToClipboard = (text, index) => {
+	const copyToClipboard = (text: string, index: number) => {
 		navigator.clipboard.writeText(text);
 		setCopiedIndex(index);
 		setTimeout(() => setCopiedIndex(null), 2000);
@@ -18,18 +18,20 @@ function CustomWallet({ wallet }) {
 			</h3>
 			<div className="flex flex-col gap-4">
 				{seeds.map((seed, index) => (
+					// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 					<div
+						// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 						key={index}
 						onClick={() => copyToClipboard(seed, index)}
 						className="relative group cursor-pointer"
 					>
-						<div className="absolute inset-0 rounded-lg blur-sm"></div>
 						<div className="relative bg-slate-800 rounded-lg p-4 flex items-center justify-between hover:bg-slate-700 transition-colors">
 							<code className="font-mono text-sm text-slate-300">{seed}</code>
 							<div className="text-slate-400 group-hover:text-white transition-colors">
 								{copiedIndex === index ? (
 									<span className="text-green-400">Copied!</span>
 								) : (
+									// biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										className="h-5 w-5"
