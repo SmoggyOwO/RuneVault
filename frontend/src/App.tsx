@@ -38,12 +38,14 @@ function App() {
 				<div className="bg-slate-800/50 rounded-2xl backdrop-blur-sm border border-slate-700 p-6 sm:p-8">
 					{!showInput ? (
 						<div className="flex flex-col sm:flex-row justify-center gap-4">
+							{/* biome-ignore lint/a11y/useButtonType: <explanation> */}
 							<button
 								className="bg-blue-500 hover:bg-blue-600 text-white rounded-lg px-6 py-3 transition-all duration-200 shadow-lg shadow-blue-500/20"
 								onClick={createAccount}
 							>
 								Create Account
 							</button>
+							{/* biome-ignore lint/a11y/useButtonType: <explanation> */}
 							<button
 								className="bg-purple-500 hover:bg-purple-600 text-white rounded-lg px-6 py-3 transition-all duration-200 shadow-lg shadow-purple-500/20"
 								onClick={haveMnemonic}
@@ -55,12 +57,14 @@ function App() {
 						<div className="space-y-6">
 							<CustomInput />
 							<div className="flex flex-col sm:flex-row justify-center gap-4">
+								{/* biome-ignore lint/a11y/useButtonType: <explanation> */}
 								<button
 									className="bg-blue-500 hover:bg-blue-600 text-white rounded-lg px-6 py-3 transition-all duration-200 shadow-lg shadow-blue-500/20"
 									onClick={createSOL}
 								>
 									Create SOL Wallet
 								</button>
+								{/* biome-ignore lint/a11y/useButtonType: <explanation> */}
 								<button
 									className="bg-purple-500 hover:bg-purple-600 text-white rounded-lg px-6 py-3 transition-all duration-200 shadow-lg shadow-purple-500/20"
 									onClick={createETH}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useGetMnemonic from "../hooks/useMnemonic";
-import { Alert, TextField, Tooltip, Button } from "@mui/material";
+import { Alert, Tooltip } from "@mui/material";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 function CustomInput() {
@@ -42,11 +42,13 @@ function CustomInput() {
 				)}
 			</div>
 			<div className="flex w-full items-center gap-2">
-				<Tooltip>
+				<Tooltip title={""}>
+					{/* biome-ignore lint/a11y/useButtonType: <explanation> */}
 					<button
 						onClick={onRegenerate}
 						className="group relative p-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
 					>
+						{/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
@@ -75,7 +77,9 @@ function CustomInput() {
 					onChange={handleInputChange}
 				/>
 				<CopyToClipboard text={inputValue} onCopy={onCopyText}>
+					{/* biome-ignore lint/a11y/useButtonType: <explanation> */}
 					<button className="group relative p-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+						{/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
