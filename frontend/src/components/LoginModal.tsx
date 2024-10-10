@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, ReactNode, useEffect } from "react";
+import { useMemo, ReactNode, useEffect } from "react";
 import {
 	Modal,
 	ModalBody,

@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Button } from "./ui/button";
 import ShinyButton from "./ui/shiny-button";
-import LoginButton, { WalletContextProvider } from "./LoginModal";
+import LoginButton from "./LoginModal";
 
 export default function HeroSection() {
 	const containerRef = useRef<HTMLDivElement>(null);

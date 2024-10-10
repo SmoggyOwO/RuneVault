@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { SearchIcon } from "lucide-react";
 import { MenuIcon } from "lucide-react";
 import { UserCircleIcon } from "lucide-react";
 import { Button } from "./ui/button";

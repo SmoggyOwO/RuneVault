@@ -1,4 +1,4 @@
-import LoginModal, { WalletContextProvider } from "./LoginModal";
+import LoginModal from "./LoginModal";
 import RuneIcon from "./RuneIcon";
 
 export default function NavigationBar() {
