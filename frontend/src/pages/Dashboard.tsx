@@ -1,3 +1,9 @@
+import AppBar from "../components/AppBar";
+
 export default function Dashboard() {
-	return <div>Hello World</div>;
+	return (
+		<div>
+			<AppBar />
+		</div>
+	);
 }

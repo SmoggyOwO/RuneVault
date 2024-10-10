@@ -31,42 +31,42 @@ interface WalletContextProviderProps {
 }
 
 export function WalletContextProvider({
-    children,
+	children,
 }: WalletContextProviderProps) {
-    const endpoint =
-        process.env.NEXT_PUBLIC_SOLANA_RPC_URL ||
-        "https://solana-devnet.g.alchemy.com/v2/your-api-key";
+	const endpoint =
+		process.env.NEXT_PUBLIC_SOLANA_RPC_URL ||
+		"https://solana-devnet.g.alchemy.com/v2/your-api-key";
 
-    const wallets = useMemo(
-        () => [new PhantomWalletAdapter(), new SolflareWalletAdapter()],
-        [],
-    );
+	const wallets = useMemo(
+		() => [new PhantomWalletAdapter(), new SolflareWalletAdapter()],
+		[],
+	);
 
-    const { connected } = useWallet(); // Get the connection status
-    const navigate = useNavigate(); // Use the useNavigate hook
+	const { connected } = useWallet(); // Get the connection status
+	const navigate = useNavigate(); // Use the useNavigate hook
 
-    useEffect(() => {
-        if (connected) {
-            navigate('/dashboard'); // Navigate to your desired page when connected
-			console.log('YO');
-        }
-    }, [connected, navigate]); // Make sure navigate is in the dependency array
+	useEffect(() => {
+		if (connected) {
+			navigate("/dashboard"); // Navigate to your desired page when connected
+			console.log("YO");
+		}
+	}, [connected, navigate]); // Make sure navigate is in the dependency array
 
-    return (
-        <ConnectionProvider endpoint={endpoint}>
-            <WalletProvider wallets={wallets} autoConnect>
-                <WalletModalProvider>{children}</WalletModalProvider>
-            </WalletProvider>
-        </ConnectionProvider>
-    );
+	return (
+		<ConnectionProvider endpoint={endpoint}>
+			<WalletProvider wallets={wallets} autoConnect>
+				<WalletModalProvider>{children}</WalletModalProvider>
+			</WalletProvider>
+		</ConnectionProvider>
+	);
 }
 
 export default function LoginModal({ children }: LoginModalProps) {
 	function Button() {
 		return (
-			<div>
+			<div className="flex">
 				{children === "Login" ? (
-					<ModalTrigger className="relative overflow-hidden px-8 py-2.5 rounded-xl border text-black dark:text-white flex justify-center group/modal-btn hover:shadow-md transition-all duration-300 ease-in-out">
+					<ModalTrigger className=" flex relative overflow-hidden px-8 py-2.5 rounded-xl border text-black dark:text-white flex justify-center group/modal-btn hover:shadow-md transition-all duration-300 ease-in-out">
 						<span className="group-hover/modal-btn:translate-x-32 text-center transition-transform duration-500 text-sm font-medium tracking-wide">
 							{children}
 						</span>
@@ -80,7 +80,7 @@ export default function LoginModal({ children }: LoginModalProps) {
 				) : (
 					<ModalTrigger className="relative overflow-hidden px-8 py-2.5 rounded-xl border text-black dark:text-white flex justify-center  hover:shadow-md">
 						<span className="group-hover/modal-btn:translate-x-32 text-center transition-transform duration-500 text-sm font-medium tracking-wide">
-							{children}
+							Get Started
 						</span>
 						{children === "Login" && (
 							<div className="-translate-x-32 group-hover/modal-btn:translate-x-0 flex items-center justify-center absolute inset-0 transition-transform duration-500">
@@ -90,7 +90,6 @@ export default function LoginModal({ children }: LoginModalProps) {
 						<div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-200/20 dark:via-gray-500/10 to-transparent group-hover/modal-btn:opacity-100 opacity-0 transition-opacity duration-500 blur-xl" />
 					</ModalTrigger>
 				)}
-				;
 			</div>
 		);
 	}
