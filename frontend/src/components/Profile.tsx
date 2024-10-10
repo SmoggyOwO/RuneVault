@@ -7,21 +7,19 @@ import { Button } from "./ui/button";
 
 export default function AccountButton() {
 	const [isOpen, setIsOpen] = useState(false);
-	const menuRef = useRef(null);
+	const menuRef = useRef<HTMLDivElement | null>(null);
 
 	const toggleMenu = () => {
 		setIsOpen(!isOpen);
 	};
 
-	// Close the menu if clicked outside
 	useEffect(() => {
-		const handleClickOutside = (event) => {
-			if (menuRef.current && !menuRef.current.contains(event.target)) {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
 				setIsOpen(false);
 			}
 		};
 
-		// Bind the event listener only when the menu is open
 		if (isOpen) {
 			document.addEventListener("mousedown", handleClickOutside);
 		} else {
