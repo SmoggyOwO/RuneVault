@@ -6,7 +6,7 @@ import { useModal } from "@/components/ui/animated-modal";
 import { checkIsAuthenticated } from "@/lib/checkIsAuthenticated";
 import { useRouter } from "next/navigation";
 
-export default function Dashboard() {
+export default function Home() {
 	const { setOpen } = useModal();
 	const router = useRouter();
 

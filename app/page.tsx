@@ -11,7 +11,7 @@ import { useEffect } from "react";
 import { checkIsAuthenticated } from "@/lib/checkIsAuthenticated";
 import { useRouter } from "next/navigation";
 
-export function FooterCredit() {
+function FooterCredit() {
 	return (
 		<div className="fixed bottom-0 right-0 mb-6 mr-8 text-sm sm:text-base text-black dark:text-white">
 			<a
@@ -29,7 +29,7 @@ export function FooterCredit() {
 	);
 }
 
-export default function LandingPage() {
+export default function Home() {
 	const router = useRouter();
 
 	useEffect(() => {
@@ -46,7 +46,7 @@ export default function LandingPage() {
 	return (
 		<div>
 			<NavigationBar />
-			
+
 			<section id="about">
 				<HeroSection />
 			</section>
@@ -78,3 +78,4 @@ export default function LandingPage() {
 		</div>
 	);
 }
+
