@@ -1,15 +1,38 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { ModalProvider } from "@/components/ui/animated-modal";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-});
+const quickSand = localFont({
+  src: [
+    {
+      path: './fonts/QuickSand-Light.ttf',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: './fonts/QuickSand-Regular.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './fonts/QuickSand-Medium.ttf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: './fonts/QuickSand-SemiBold.ttf',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: './fonts/QuickSand-Bold.ttf',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+   variable: '--font-quick-sand'
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,8 +46,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+      <body className={`${quickSand.variable}`}>
+        <ModalProvider>
+          {children}
+          </ModalProvider>
       </body>
     </html>
   );
