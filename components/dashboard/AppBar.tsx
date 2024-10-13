@@ -1,7 +1,7 @@
-import AccountButton from "@/components/dashboard/Profile";
+import AccountButton from "@/components/Profile";
 import RuneIcon from "@/components/RuneIcon"
 import Use from "@/components/dashboard/Use";
-import Wallet from "@/components/dashboard/Wallet";
+import Wallet from "@/components/Wallet";
 
 export default function AppBar() {
 	return (

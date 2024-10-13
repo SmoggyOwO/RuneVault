@@ -1,14 +1,34 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import ShinyButton from "@/components/ui/shiny-button";
-import LoginButton from "@/components/landing/LoginModal";
+import LoginButton from "@/components/LoginModal";
 import HeroImage from '@/assets/heroimage.jpg'
 import Image from "next/image";
 import { ModalProvider } from "../ui/animated-modal";
+import { checkIsAuthenticated } from "@/lib/checkIsAuthenticated";
+import LoginModal from "@/components/LoginModal";
+import Wallet from "../Wallet";
+import AccountButton from "../Profile";
+import { useRouter } from "next/navigation";
 
 export default function HeroSection() {
+	const [login, setLogin] = useState("false");
+	const router = useRouter();
+	useEffect(() => {
+		const checkAuth = async () => {
+			const isAuthenticated = await checkIsAuthenticated();
+			if (isAuthenticated) {
+				setLogin("true");
+			} else {
+                setLogin("false");
+            }
+            console.log(login);
+		};
+
+		checkAuth();
+	}, [login]);
 	const containerRef = useRef<HTMLDivElement>(null);
 	const { scrollYProgress } = useScroll({
 		target: containerRef,
@@ -20,8 +40,8 @@ export default function HeroSection() {
 
 	return (
 		<div ref={containerRef} className="relative ">
-			<div className="z-10 mt-10 flex lg:min-h-[10rem] md:min-h-[7rem] min-h-[5rem] items-center justify-center">
-				<div className="mt-28 max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
+			<div className="z-10 flex lg:min-h-[10rem] md:min-h-[7rem] min-h-[5rem] items-center justify-center">
+				<div className="mt-16 max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="flex flex-col items-center">
 						<motion.div
 							className="flex justify-center"
@@ -53,7 +73,7 @@ export default function HeroSection() {
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.6, delay: 0.6 }}
 						>
-							<ModalProvider><LoginButton>Get Started</LoginButton></ModalProvider>
+							<div>{login === "false" ? <LoginModal>Get Started</LoginModal> : <div className="flex relative overflow-hidden px-8 py-2.5 rounded-xl border text-black dark:text-white flex justify-center group/modal-btn hover:shadow-md transition-all duration-300 ease-in-out  text-center transition-transform duration-500 text-sm font-medium tracking-wide" onClick={() => router.push("dashboard")}>Go to Dashboard</div>}</div>
 						</motion.div>
 					</div>
 				</div>

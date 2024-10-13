@@ -30,18 +30,6 @@ function FooterCredit() {
 }
 
 export default function Home() {
-	const router = useRouter();
-
-	useEffect(() => {
-		const checkAuth = async () => {
-			const isAuthenticated = await checkIsAuthenticated();
-				if (isAuthenticated) {
-					router.push("/dashboard");
-				}
-		};
-		checkAuth();
-	
-	}, [])
 
 	return (
 		<div>

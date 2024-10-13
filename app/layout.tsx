@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { WalletContextProvider } from "@/components/LoginModal";
 import { ModalProvider } from "@/components/ui/animated-modal";
 
 const quickSand = localFont({
@@ -47,9 +48,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${quickSand.variable}`}>
+      <WalletContextProvider>
         <ModalProvider>
           {children}
           </ModalProvider>
+          </WalletContextProvider>
       </body>
     </html>
   );

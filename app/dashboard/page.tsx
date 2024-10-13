@@ -2,12 +2,10 @@
 
 import AppBar from "@/components/dashboard/AppBar";
 import { useEffect } from "react";
-import { useModal } from "@/components/ui/animated-modal";
 import { checkIsAuthenticated } from "@/lib/checkIsAuthenticated";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
-	const { setOpen } = useModal();
 	const router = useRouter();
 
 	useEffect(() => {
@@ -22,7 +20,7 @@ export default function Home() {
 	}, []);
 
 	return (
-		<div className="bg-blue-50 min-h-screen">
+		<div className=" min-h-screen">
 			<AppBar />
 		</div>
 	);

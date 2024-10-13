@@ -1,9 +1,10 @@
-"use client";
 
 import { useState, useEffect, useRef } from "react";
 import { MenuIcon } from "lucide-react";
 import { UserCircleIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { signOut } from 'next-auth/react';
+
 
 export default function AccountButton() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -53,14 +54,14 @@ export default function AccountButton() {
 					<ul className="py-1">
 						<li>
 							<a
-								href="/patient/profile"
+								href="/dashboard"
 								className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
 							>
 								Go to Profile
 							</a>
 						</li>
 						<li>
-							<button className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">
+							<button className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100" onClick={() => signOut({callbackUrl: "/"})}>
 								Logout
 							</button>
 						</li>

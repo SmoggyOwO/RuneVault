@@ -1,16 +1,32 @@
 "use client";
 
-import React, { useEffect } from 'react';
-import LoginModal from "@/components/landing/LoginModal";
+import React, { Profiler, useEffect, useState } from 'react';
+import LoginModal from "@/components/LoginModal";
 import RuneIcon from "@/components/RuneIcon";
 import { useModal } from "@/components/ui/animated-modal";
+import { checkIsAuthenticated } from '@/lib/checkIsAuthenticated';
+import Wallet from '../Wallet';
+import { Account } from '@solana/web3.js';
+import AccountButton from '../Profile';
+import { useWallet } from '@solana/wallet-adapter-react';
 
 export default function NavigationBar() {
-    const { setOpen } = useModal();
-
+    const { connected } = useWallet();
+    const [login, setLogin] = useState("false");
 	useEffect(() => {
-		setOpen(true);
-	  }, [setOpen]);
+		const checkAuth = async () => {
+			const isAuthenticated = await checkIsAuthenticated();
+			if (isAuthenticated) {
+				setLogin("true");
+			} else {
+                setLogin("false");
+            }
+            console.log(login);
+		};
+
+		checkAuth();
+	}, [login]);
+
 
     const scrollToSection = (sectionId: string | null) => {
         if (sectionId) {
@@ -22,7 +38,7 @@ export default function NavigationBar() {
     };
 
     return (
-        <div className="flex justify-between items-center p-4 px-28 backdrop-blur-[12px] z-10 top-0 left-0 sticky w-full">
+        <div className="flex justify-between items-center p-4 px-20 backdrop-blur-[12px] z-10 top-0 left-0 sticky w-full">
             <RuneIcon />
             <div className="flex gap-8">
                 <div
@@ -50,7 +66,9 @@ export default function NavigationBar() {
                     Contact
                 </div>
             </div>
-            <LoginModal>Login</LoginModal>
+            <div>
+                {login === "false" ? <LoginModal>Login</LoginModal> : <div className='flex gap-4'><Wallet /> <AccountButton /></div>}
+            </div>
         </div>
     );
 }

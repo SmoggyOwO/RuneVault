@@ -8,7 +8,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         maxAge: 30 * 24 * 60 * 60,
     },
     pages: {
-        signIn: "/v0"
+        signIn: "/"
     },
     providers: [
         Google({

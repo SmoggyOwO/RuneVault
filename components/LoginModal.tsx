@@ -45,8 +45,6 @@ export function WalletContextProvider({ children }: { children: ReactNode }) {
 }
 
 export default function LoginModal({ children }: LoginModalProps) {
-    const { open, setOpen } = useModal();
-    console.log(open);
     function Button() {
         return (
                 <div>
