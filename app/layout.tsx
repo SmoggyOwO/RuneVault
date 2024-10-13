@@ -6,27 +6,27 @@ import { ModalProvider } from "@/components/ui/animated-modal";
 const quickSand = localFont({
   src: [
     {
-      path: './fonts/QuickSand-Light.ttf',
+      path: './fonts/quickSand-light.ttf',
       weight: '300',
       style: 'normal',
     },
     {
-      path: './fonts/QuickSand-Regular.ttf',
+      path: './fonts/quickSand-regular.ttf',
       weight: '400',
       style: 'normal',
     },
     {
-      path: './fonts/QuickSand-Medium.ttf',
+      path: './fonts/quickSand-medium.ttf',
       weight: '500',
       style: 'normal',
     },
     {
-      path: './fonts/QuickSand-SemiBold.ttf',
+      path: './fonts/quickSand-semibold.ttf',
       weight: '600',
       style: 'normal',
     },
     {
-      path: './fonts/QuickSand-Bold.ttf',
+      path: './fonts/quickSand-bold.ttf',
       weight: '700',
       style: 'normal',
     },
