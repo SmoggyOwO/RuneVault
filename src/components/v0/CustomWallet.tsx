@@ -1,4 +1,4 @@
-import useGetMnemonic from "@/src/hooks/useMnemonic";
+import useGetMnemonic from "@/hooks/useMnemonic";
 import { useState } from "react";
 
 function CustomWallet({ wallet }: { wallet: string }) {

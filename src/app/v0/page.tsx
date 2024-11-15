@@ -1,9 +1,9 @@
 "use client"
 
-import useGetMnemonic from "@/src/hooks/useMnemonic";
+import useGetMnemonic from "@/hooks/useMnemonic";
 import { useState } from "react";
-import CustomInput from "@/src/components/v0/CustomInput";
-import CustomWallet from "@/src/components/v0/CustomWallet";
+import CustomInput from "@/components/v0/CustomInput";
+import CustomWallet from "@/components/v0/CustomWallet";
 
 function Wallet() {
 	const [showInput, setShowInput] = useState(false);

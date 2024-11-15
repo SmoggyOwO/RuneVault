@@ -8,6 +8,7 @@ export async function middleware(req: NextRequest) {
   } else {
     return NextResponse.redirect(new URL("/", req.url));
   }
+  
 }
 
 export const config = {

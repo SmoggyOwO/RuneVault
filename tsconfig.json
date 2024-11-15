@@ -25,7 +25,11 @@
       ],
       "@public/*": [
         "./public/*"
+      ],
+      "@prisma/*": [
+        "./src/prisma*"
       ]
+
     }
   },
   "include": [

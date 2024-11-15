@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useGetMnemonic from "@/src/hooks/useMnemonic";
+import useGetMnemonic from "@/hooks/useMnemonic";
 import { Alert, Tooltip } from "@mui/material";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
