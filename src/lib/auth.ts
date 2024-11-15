@@ -12,6 +12,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   secret: process.env.AUTH_SECRET,
   session: {
     maxAge: 30 * 24 * 60 * 60,
+    strategy: "jwt"
   },
 
   pages: {
@@ -27,28 +28,32 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
-    async session({ user, session }) {
+    async signIn({ user }) {
       const mnemonic = generateMnemonic();
       const seed = mnemonicToSeedSync(mnemonic);
       const path = `m/44'/501'/1'/0'`;
       const derivedSeed = derivePath(path, seed.toString("hex")).key;
       const secret = nacl.sign.keyPair.fromSeed(derivedSeed).secretKey;
       const address = Keypair.fromSecretKey(secret).publicKey.toBase58();
-      await prisma.wallet.upsert({
-        where: {
-          userId: user?.id,
-        },
-        update: {
-          address: address,
-          mnemonic: mnemonic,
-        },
-        create: {
-          address: address,
-          mnemonic: mnemonic,
-          userId: user?.id,
-        },
-      });
-      return session;
+      if (user) {
+        const walletexists = await prisma.wallet.findUnique({
+          where: {
+            userId: user.id
+          }
+        })
+        if (!walletexists) {
+          await prisma.wallet.update({
+            where: {
+              userId: user?.id,
+            },
+            data: {
+              address: address,
+              mnemonic: mnemonic,
+            },
+          });
+        }
+      }
+      return true;
     }
   },
 });

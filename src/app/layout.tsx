@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { ModalProvider } from "@/src/components/ui/animated-modal";
+import { ModalProvider } from "@/components/ui/animated-modal";
 import { SessionProvider } from "next-auth/react";
 import Providers from "./providers";
 
