@@ -6,6 +6,9 @@
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+  images: {
+    domains: ['www.cryptocompare.com'], // Add allowed domains here
+  }
 }
  
 export default nextConfig

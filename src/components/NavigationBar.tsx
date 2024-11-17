@@ -53,7 +53,7 @@ export default function NavigationBar() {
   const pathname = usePathname();
 
   return (
-    <div className="flex justify-between items-center p-4 px-20 backdrop-blur-[12px] z-10 top-0 left-0 sticky w-full">
+    <div className={`${pathname === "/" ? "" : "border"} flex justify-between items-center p-4 px-20 backdrop-blur-[12px] z-10 top-0 left-0 sticky w-full`}>
       <RuneIcon />
       {pathname === "/" ? <SectionLinks /> : <div></div>}
       <div>
