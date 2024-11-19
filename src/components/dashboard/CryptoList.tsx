@@ -1,46 +1,135 @@
-"use client"
-
-import Image from "next/image";
+"use client";
 import { useEffect, useState } from "react";
-import axios from 'axios';
+import Image from "next/image";
+import axios from "axios";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Input } from "@/components/ui/input";
 
-export default function CryptoList() {
-    const [logo, setLogo] = useState("");
-    const [name, setName] = useState("");
-    const [price, setPrice] = useState("");
-    const [change, setChange] = useState("");
-    const [mc, setMC] = useState("");
+export default function CryptoList({ searchQuery }) {
+  const [list, setList] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
-    axios.get("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,SOL&tsyms=USD&api_key=f76a5486d7e0a12c999cbee3866bdb97a44239c3469783ae6e85acc0db67b541")
-        .then((res) => {
-            setPrice(res.data.DISPLAY.BTC.USD.PRICE);
-            setLogo("https://www.cryptocompare.com"+res.data.DISPLAY.BTC.USD.IMAGEURL);
-            setName(res.data.RAW.BTC.USD.FROMSYMBOL);
-            setChange(res.data.DISPLAY.BTC.USD.CHANGEPCT24HOUR+"%");
-            setMC(res.data.DISPLAY.BTC.USD.MKTCAP);
-        })
+    setIsLoading(true);
+    axios
+      .get(
+        "https://min-api.cryptocompare.com/data/top/totalvolfull?limit=100&tsym=USD&api_key=f76a5486d7e0a12c999cbee3866bdb97a44239c3469783ae6e85acc0db67b541"
+      )
+      .then((res) => {
+        setList(res.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setError(error);
+        setIsLoading(false);
+      });
   }, []);
+
+  const getChangeColor = (change) => {
+    const numChange = parseFloat(change);
+    if (numChange > 0) return "text-green-600";
+    if (numChange < 0) return "text-red-600";
+    return "text-gray-600";
+  };
+
+  const filteredCryptos = list?.Data?.filter(
+    (crypto) =>
+      crypto.CoinInfo.FullName.toLowerCase().includes(
+        searchQuery.toLowerCase()
+      ) ||
+      crypto.CoinInfo.Name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  if (isLoading) {
+    return (
+      <Card className="mt-4">
+        <CardContent className="p-6">
+          <div className="flex items-center justify-center h-40">
+            <div className="text-lg text-gray-500">
+              Loading cryptocurrencies...
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  if (error) {
+    return (
+      <Card className="mt-4">
+        <CardContent className="p-6">
+          <div className="text-red-500">Error loading cryptocurrency data</div>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
-    <div className="rounded-xl flex flex-col bg-gray-200 p-4">
-      <div className="text-lg font-bold mb-4">All cryptocurrencies</div>
-      <div className="grid grid-cols-2 border pb-3">
-        <div className="font-medium">Asset</div>
-        <div className="flex justify-around">
-          <div className="font-medium">Price</div>
-          <div className="font-medium">Change (24H)</div>
-          <div className="font-medium">Market cap</div>
-        </div>
-      </div>
-      <div className="grid grid-cols-2 ">
-        <div className="flex items-center gap-2\">
-          <div><Image src={logo} alt="crypto image" height={40} width={40}/></div>
-          <div>{name}</div>
-        </div>
-        <div className="flex justify-around">
-          <div>{price}</div>
-          <div>{change}</div>
-          <div>{mc}</div>
-        </div>
+    <div className="mt-4 border rounded-lg p-4">
+      <div className="text-2xl">Top Cryptocurrencies</div>
+
+      <div className="overflow-x-auto">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="py-4 text-left">Asset</TableHead>
+              <TableHead className="py-4 text-right">Price</TableHead>
+              <TableHead className="py-4 text-right">Change (24H)</TableHead>
+              <TableHead className="py-4 text-right">Market Cap</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {filteredCryptos?.map((crypto) => (
+              <TableRow key={crypto.CoinInfo.Id}>
+                <TableCell className="py-4">
+                  <div className="flex items-center gap-3">
+                    <div className="relative h-8 w-8">
+                      <Image
+                        src={`https://www.cryptocompare.com${crypto.CoinInfo.ImageUrl}`}
+                        alt={crypto.CoinInfo.FullName}
+                        fill
+                        className="rounded-full object-contain"
+                      />
+                    </div>
+                    <div>
+                      <div className="font-medium">
+                        {crypto.CoinInfo.FullName}
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        {crypto.CoinInfo.Name}
+                      </div>
+                    </div>
+                  </div>
+                </TableCell>
+                <TableCell className="py-4 text-right">
+                  {crypto.DISPLAY?.USD?.PRICE}
+                </TableCell>
+                <TableCell className="py-4 text-right">
+                  <span
+                    className={getChangeColor(
+                      crypto.DISPLAY?.USD?.CHANGEPCT24HOUR
+                    )}
+                  >
+                    {crypto.DISPLAY?.USD?.CHANGEPCT24HOUR}%
+                  </span>
+                </TableCell>
+                <TableCell className="py-4 text-right">
+                  {crypto.DISPLAY?.USD?.MKTCAP}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
     </div>
   );
