@@ -12,16 +12,14 @@ import { SystemProgram } from "@solana/web3.js";
 export class SolanaUtils {
   private readonly connection: Connection;
 
-  constructor(
-    endpoint: string = "https://api.devnet.solana.com"
-  ) {
+  constructor(endpoint: string = "https://api.devnet.solana.com") {
     this.connection = new Connection(endpoint);
   }
 
   public async getBalance(address: string): Promise<number> {
     try {
       const publicKey = new PublicKey(address);
-      const balance = await this.connection.getBalance(publicKey);
+      const balance = await this.connection.getBalance(publicKey, "finalized");
       return balance / LAMPORTS_PER_SOL;
     } catch (error) {
       console.error("Error getting balance:", error);

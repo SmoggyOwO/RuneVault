@@ -38,6 +38,6 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "next.config.mjs"  ],
+, "next.config.mjs", "src/hooks/useFetchBalance.tsx"  ],
   "exclude": ["node_modules"]
 }

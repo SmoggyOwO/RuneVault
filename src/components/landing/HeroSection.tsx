@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useSession } from "next-auth/react";
@@ -58,7 +58,7 @@ export default function HeroSection() {
               {status === "loading" ? (
                 <div className="animate-pulse bg-gray-200 h-10 w-32 rounded-xl" />
               ) : status === "authenticated" ? (
-                <Link href="/c/dashboard">
+                <Link href="/c/portfolio">
                   <div className="relative overflow-hidden px-8 py-2.5 rounded-xl border text-black dark:text-white justify-center group/modal-btn hover:shadow-md transition-all duration-300 ease-in-out text-center text-sm font-medium tracking-wide cursor-pointer">
                     Go to Dashboard
                   </div>

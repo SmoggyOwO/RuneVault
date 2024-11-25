@@ -13,7 +13,13 @@ import {
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 
-export default function CryptoList({ searchQuery }) {
+export default function CryptoList({
+  searchQuery,
+  limit,
+}: {
+  searchQuery: string;
+  limit: Number;
+}) {
   const [list, setList] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -22,7 +28,7 @@ export default function CryptoList({ searchQuery }) {
     setIsLoading(true);
     axios
       .get(
-        "https://min-api.cryptocompare.com/data/top/totalvolfull?limit=100&tsym=USD&api_key=f76a5486d7e0a12c999cbee3866bdb97a44239c3469783ae6e85acc0db67b541"
+        `https://min-api.cryptocompare.com/data/top/totalvolfull?limit=${limit}&tsym=USD&api_key=${process.env.CRYPTO_COMPARE}`
       )
       .then((res) => {
         setList(res.data);
@@ -35,7 +41,7 @@ export default function CryptoList({ searchQuery }) {
       });
   }, []);
 
-  const getChangeColor = (change) => {
+  const getChangeColor = (change: string) => {
     const numChange = parseFloat(change);
     if (numChange > 0) return "text-green-600";
     if (numChange < 0) return "text-red-600";
@@ -43,7 +49,7 @@ export default function CryptoList({ searchQuery }) {
   };
 
   const filteredCryptos = list?.Data?.filter(
-    (crypto) =>
+    (crypto: { CoinInfo: { FullName: string; Name: string } }) =>
       crypto.CoinInfo.FullName.toLowerCase().includes(
         searchQuery.toLowerCase()
       ) ||

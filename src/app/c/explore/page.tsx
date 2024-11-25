@@ -17,7 +17,7 @@ export default function () {
           className="rounded-lg px-4 py-2 border"
         ></input>
       </div>
-      <CryptoList searchQuery={searchQuery} />
+      <CryptoList searchQuery={searchQuery} limit={100} />
     </div>
   );
 }

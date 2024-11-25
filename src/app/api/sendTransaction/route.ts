@@ -30,6 +30,15 @@ export async function POST(req: Request) {
 
     const signature = await solanaUtils.sendSol(keypair, toAddress, amount);
 
+    await prisma.transaction.create({
+      data: {
+        userId: user.id,
+        type: "sent",
+        amount: String(amount),
+        toAddress: toAddress,
+      },
+    });
+
     return NextResponse.json({ signature });
   } catch (error) {
     return NextResponse.json({ error: error }, { status: 500 });
