@@ -1,5 +1,4 @@
 "use client";
-import CryptoListWithSearch from "@/components/dashboard/CryptoList";
 import CryptoList from "@/components/dashboard/CryptoList";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
