@@ -139,10 +139,10 @@ importers:
         version: 5.0.0-rc.2(@types/react@18.3.11)(react@19.0.0-rc-f994737d14-20240522)
     devDependencies:
       '@types/node':
-        specifier: ^20
+        specifier: ^20.16.11
         version: 20.16.11
       '@types/react':
-        specifier: ^18
+        specifier: ^18.3.11
         version: 18.3.11
       '@types/react-dom':
         specifier: ^18
@@ -157,7 +157,7 @@ importers:
         specifier: ^5.22.0
         version: 5.22.0
       typescript:
-        specifier: ^5
+        specifier: ^5.6.3
         version: 5.6.3
 
 packages:
