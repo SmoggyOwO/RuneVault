@@ -32,11 +32,11 @@ const SideBar = () => {
       label: "Transactions",
       href: "/c/transactions",
     },
-    { icon: <ArrowLeftRight size={20} />, label: "Swap", href: "/swap" },
+    { icon: <ArrowLeftRight size={20} />, label: "Swap", href: "/c/swap" },
     {
       icon: <CircleChevronRight size={20} />,
       label: "Create token",
-      href: "/c/create",
+      href: "/c/create-token",
     },
   ];
 
