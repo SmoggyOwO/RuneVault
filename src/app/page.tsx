@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import NavigationBar from "@/components/NavigationBar";
 import CryptoNotifications from "@/components/landing/CryptoNotifications";

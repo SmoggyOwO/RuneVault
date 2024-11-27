@@ -1,4 +1,4 @@
- const nextConfig = {
+const nextConfig = {
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if
@@ -7,8 +7,8 @@
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ['www.cryptocompare.com'], // Add allowed domains here
-  }
-}
- 
-export default nextConfig
+    domains: ["www.cryptocompare.com", "lh3.googleusercontent.com"], // Add allowed domains here
+  },
+};
+
+export default nextConfig;

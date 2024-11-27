@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   Modal,
@@ -7,12 +7,19 @@ import {
   ModalContent,
 } from "@/components/ui/animated-modal";
 import { FaGoogle } from "react-icons/fa";
-import { WalletModalProvider, WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import {
+  WalletModalProvider,
+  WalletMultiButton,
+} from "@solana/wallet-adapter-react-ui";
 import "@solana/wallet-adapter-react-ui/styles.css";
 import { handleGoogleSignIn } from "@/lib/googleSignin";
-import { ConnectionProvider, WalletProvider } from "@solana/wallet-adapter-react";
+import {
+  ConnectionProvider,
+  WalletProvider,
+} from "@solana/wallet-adapter-react";
 import { ReactNode, useMemo } from "react";
 import { auth } from "@/lib/auth";
+import useCreateWallet from "@/hooks/useCreateWallet";
 
 interface LoginModalProps {
   children: string;
@@ -20,7 +27,6 @@ interface LoginModalProps {
 }
 
 export default function LoginModal({ children }: LoginModalProps) {
-  
   function Button() {
     return (
       <div>
@@ -61,7 +67,9 @@ export default function LoginModal({ children }: LoginModalProps) {
             <div className="space-y-4 flex flex-col items-center justify-center">
               <button
                 className="w-1/2 flex items-center justify-center px-6 py-3 rounded-full bg-white text-gray-900 hover:bg-gray-100 transition-colors duration-300 font-medium shadow-md hover:shadow-lg transform hover:scale-105 transition-transform"
-                onClick={() => handleGoogleSignIn()}
+                onClick={() => {
+                  handleGoogleSignIn();
+                }}
               >
                 <FaGoogle className="mr-3 text-black" size={20} />
                 Continue with Google
