@@ -28,7 +28,23 @@ export async function POST(req: Request) {
 
     const keypair = await walletService.getKeypairFromUserId(user.id);
 
-    const signature = await solanaUtils.sendSol(keypair, toAddress, amount);
+    // Use a timeout to prevent the function from taking too long
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error("Function timed out")), 50000)
+    );
+
+    const signature = await Promise.race([
+      solanaUtils.sendSol(keypair, toAddress, amount),
+      timeoutPromise,
+    ]);
+
+    // If the function timed out, return a generic error response
+    if (!signature) {
+      return NextResponse.json(
+        { error: "Error sending transaction. Please try again later." },
+        { status: 500 }
+      );
+    }
 
     await prisma.transaction.create({
       data: {

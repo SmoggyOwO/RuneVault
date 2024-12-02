@@ -140,15 +140,25 @@ export default function TransactionsPage() {
               </SelectContent>
             </Select>
 
-            <Button variant="outline" size="icon" className="hidden sm:flex">
+            <Button
+              variant="outline"
+              size="icon"
+              disabled
+              className="hidden sm:flex"
+            >
               <Calendar className="h-4 w-4" />
             </Button>
 
-            <Button variant="outline" size="icon" className="hidden sm:flex">
+            <Button
+              variant="outline"
+              size="icon"
+              disabled
+              className="hidden sm:flex"
+            >
               <Filter className="h-4 w-4" />
             </Button>
 
-            <Button variant="default">
+            <Button variant="default" disabled>
               <ArrowDownToLine className="mr-2 h-4 w-4" /> Export
             </Button>
           </div>
