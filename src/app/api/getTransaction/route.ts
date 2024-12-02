@@ -2,7 +2,7 @@ import prisma from "@/prisma/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-  const { email } = await req.json();
+  const { email, limit } = await req.json();
   if (!email) {
     return NextResponse.json(
       { error: "Missing required parameters" },
@@ -23,6 +23,10 @@ export async function POST(req: NextRequest) {
     }
 
     const transactions = await prisma.transaction.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      ...(limit ? { take: limit } : {}),
       where: {
         userId: user.id,
       },

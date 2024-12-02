@@ -1,13 +1,14 @@
 "use client";
 import React, { useState } from "react";
+import {} from "@radix-ui/react-dropdown-menu";
+import { Button } from "@/components/ui/button";
 import {
+  DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { DropdownMenu } from "@/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { AlertCircle, CheckCircle2, Loader2, Copy, Check } from "lucide-react";
@@ -55,6 +56,7 @@ export default function TransferDashboard() {
   const [errorMessage, setErrorMessage] = useState("");
   const [transactionSignature, setTransactionSignature] = useState("");
   const [isCopied, setIsCopied] = useState(false);
+  const [activityRefreshKey, setActivityRefreshKey] = useState(0);
 
   const isValidForm = () => {
     return (
@@ -108,6 +110,7 @@ export default function TransferDashboard() {
       const data = await response.json();
       setTransactionSignature(data.signature);
       setTransactionStatus(TransactionStatus.SUCCESS);
+      setActivityRefreshKey((prev) => prev + 1);
     } catch (error) {
       console.error("Error:", error);
       setErrorMessage(error.message || "Transaction failed. Please try again.");
@@ -219,6 +222,7 @@ export default function TransferDashboard() {
                     >
                       {currencies.map((curr) => (
                         <DropdownMenuItem
+                          disabled={curr.id != "Solana"}
                           key={curr.id}
                           onClick={() => setCurrency(curr.name)}
                         >
@@ -292,7 +296,7 @@ export default function TransferDashboard() {
 
           <div className="space-y-6">
             <TransactionSummary />
-            <RecentActivity />
+            <RecentActivity refreshTrigger={activityRefreshKey} />
           </div>
         </div>
       </div>

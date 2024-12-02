@@ -35,7 +35,6 @@ export default function TransactionsPage() {
   const [copiedIndex, setCopiedIndex] = useState(null);
   const itemsPerPage = 10;
 
-  // Timestamp formatting function
   const formatTimestamp = (timestamp) => {
     const date = new Date(timestamp);
     const now = new Date();
@@ -47,7 +46,6 @@ export default function TransactionsPage() {
     return `${diffInDays} day${diffInDays > 1 ? "s" : ""} ago`;
   };
 
-  // Transform transaction data
   const transformTransactions = (apiData) => {
     return apiData.map((transaction) => ({
       id: transaction.id,
@@ -61,11 +59,10 @@ export default function TransactionsPage() {
         4
       )}...${transaction.toAddress.slice(-4)}`,
       fullAddress: transaction.toAddress,
-      transactionFee: "0.0001", // You might want to get this from the actual data
+      transactionFee: "0.00015",
     }));
   };
 
-  // Fetch transactions
   const fetchTransactions = async () => {
     if (!session.data?.user) return;
 
@@ -92,7 +89,6 @@ export default function TransactionsPage() {
     }
   };
 
-  // Copy to clipboard function
   const copyToClipboard = async (text, index) => {
     try {
       await navigator.clipboard.writeText(text);

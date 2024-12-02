@@ -8,6 +8,7 @@ import HeroSection from "@/components/landing/HeroSection";
 import TokenOrbit from "@/components/landing/TokenOrbit";
 import Newsletter from "@/components/landing/Newsletter";
 import SponsorTicker from "@/components/landing/SponsorTicker";
+import CreateWallet from "@/components/CreateWallet";
 
 function FooterCredit() {
   return (
@@ -65,6 +66,7 @@ export default function () {
         <Newsletter />
       </section>
       <FooterCredit />
+      <CreateWallet />
     </div>
   );
 }

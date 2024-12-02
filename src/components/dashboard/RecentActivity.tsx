@@ -9,11 +9,12 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
-export default function RecentActivity() {
+export default function RecentActivity({ refreshTrigger }) {
   const session = useSession();
 
-  const formatTimestamp = (timestamp) => {
+  const formatTimestamp = (timestamp: string | number | Date) => {
     const date = new Date(timestamp);
     const now = new Date();
     const diffInHours = Math.floor((now - date) / (1000 * 60 * 60));
@@ -24,7 +25,7 @@ export default function RecentActivity() {
     return `${diffInDays} day${diffInDays > 1 ? "s" : ""} ago`;
   };
 
-  const transformRecentActivity = (apiData) => {
+  const transformRecentActivity = (apiData: any[]) => {
     return apiData.map((activity) => ({
       amount: `${activity.amount} SOL`,
       address: `${activity.toAddress.slice(0, 4)}...${activity.toAddress.slice(
@@ -47,6 +48,7 @@ export default function RecentActivity() {
         },
         body: JSON.stringify({
           email: session.data.user.email,
+          limit: 3,
         }),
       });
 
@@ -55,7 +57,6 @@ export default function RecentActivity() {
       }
 
       const data = await response.json();
-      // Transform the data directly before setting the state
       const transformedActivity = transformRecentActivity(data);
       setRecentActivity(transformedActivity);
     } catch (error) {
@@ -77,16 +78,18 @@ export default function RecentActivity() {
 
   useEffect(() => {
     handleGetTransaction();
-  }, [session]);
+  }, [session, refreshTrigger]);
 
   return (
     <Card>
       <CardHeader className="pb-4">
         <div className="flex justify-between items-center">
           <CardTitle className="text-lg font-medium">Recent Activity</CardTitle>
-          <Button variant="ghost" size="sm">
-            View all
-          </Button>
+          <Link href={"/c/transactions"}>
+            <Button variant="ghost" size="sm">
+              View all
+            </Button>
+          </Link>
         </div>
       </CardHeader>
       <CardContent className="space-y-4">

@@ -8,9 +8,7 @@ import { ReactNode } from "react";
 export default function Providers({ children }: { children: ReactNode }) {
   return (
     <SessionProvider>
-      <ModalProvider>
-        <PortfolioProvider>{children}</PortfolioProvider>
-      </ModalProvider>
+      <ModalProvider>{children}</ModalProvider>
     </SessionProvider>
   );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import SideBar from "@/components/dashboard/SideBar";
 import NavigationBar from "@/components/NavigationBar";
+import { PortfolioProvider } from "@/contexts/PortfolioProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,11 +17,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen">
-        <NavigationBar />
-        <div className="flex">
-          <SideBar />
-          <main className="flex-1 p-6">{children}</main>
-        </div>
+        <PortfolioProvider>
+          <NavigationBar />
+          <div className="flex">
+            <SideBar />
+            <main className="flex-1 p-6">{children}</main>
+          </div>
+        </PortfolioProvider>
       </body>
     </html>
   );

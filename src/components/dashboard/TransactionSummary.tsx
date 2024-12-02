@@ -11,7 +11,7 @@ export default function TransactionSummary() {
       <CardContent className="space-y-3">
         <div className="flex justify-between">
           <span className="text-gray-600">Network Fee</span>
-          <span className="font-medium">0.000005 SOL</span>
+          <span className="font-medium">0.00015 SOL</span>
         </div>
         <div className="flex justify-between">
           <span className="text-gray-600">Processing Time</span>
