@@ -29,4 +29,21 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       allowDangerousEmailAccountLinking: true,
     }),
   ],
+  callbacks: {
+    async session({ session, token }) {
+      const user = await prisma.user.findUnique({
+        where: {
+          email: session.user.email,
+        },
+      });
+      console.log(session);
+      console.log(token);
+      console.log(user);
+      if (!user) {
+        return null;
+      }
+
+      return session;
+    },
+  },
 });
