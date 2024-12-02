@@ -94,7 +94,7 @@ export function PortfolioValue() {
 }
 
 export default function Portfolio() {
-  const { isFetching, refetch, error } = usePortfolioContext();
+  const { balance, isFetching, refetch, error } = usePortfolioContext();
   const session = useSession();
   return (
     <div className="max-w-7xl mx-auto p-6">
@@ -128,7 +128,7 @@ export default function Portfolio() {
         </div>
 
         <div className="space-y-6 mt-3">
-          <PortfolioStats />
+          <PortfolioStats balance={balance} />
         </div>
       </div>
     </div>
@@ -140,7 +140,7 @@ const chartData = {
   datasets: [
     {
       label: "Portfolio Value (SOL)",
-      data: [200, 220, 210, 250, 270, 300, 290],
+      data: [0, 0, 0, 0, 0, 0, 0],
       borderColor: "#4F46E5",
       backgroundColor: "rgba(79, 70, 229, 0.2)",
       fill: true,
