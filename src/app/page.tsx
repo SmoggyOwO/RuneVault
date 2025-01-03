@@ -12,7 +12,7 @@ import CreateWallet from "@/components/CreateWallet";
 
 function FooterCredit() {
   return (
-    <div className="fixed bottom-0 right-0 mb-6 mr-8 text-sm sm:text-base text-black dark:text-white">
+    <div className="hidden md:block fixed bottom-0 right-0 mb-6 mr-8 text-sm sm:text-base text-black dark:text-white">
       <a
         href="https://github.com/SmoggyOwO"
         target="_blank"
@@ -30,7 +30,7 @@ function FooterCredit() {
 
 export default function () {
   return (
-    <div>
+    <div className="px-4 md:px-0">
       <NavigationBar />
 
       <section id="about">

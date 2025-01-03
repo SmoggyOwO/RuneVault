@@ -71,7 +71,7 @@ export default function FeaturesOverview() {
 
 			<BentoGrid className="lg:grid-rows-3 mt-10">
 				{features.map((feature) => (
-					<BentoCard key={feature.name} {...feature} />
+					<BentoCard  key={feature.name} {...feature} />
 				))}
 			</BentoGrid>
 		</div>

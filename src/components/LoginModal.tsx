@@ -66,7 +66,7 @@ export default function LoginModal({ children }: LoginModalProps) {
             </div>
             <div className="space-y-4 flex flex-col items-center justify-center">
               <button
-                className="w-1/2 flex items-center justify-center px-6 py-3 rounded-full bg-white text-gray-900 hover:bg-gray-100 transition-colors duration-300 font-medium shadow-md hover:shadow-lg transform hover:scale-105 transition-transform"
+                className="w-1/2 flex items-center justify-center py-4 px-6 rounded-lg bg-white text-gray-900 hover:bg-gray-100 transition-colors duration-300 font-medium shadow-md hover:shadow-lg transform hover:scale-105 transition-transform"
                 onClick={() => {
                   handleGoogleSignIn();
                 }}

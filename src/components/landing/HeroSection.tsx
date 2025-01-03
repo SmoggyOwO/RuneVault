@@ -34,7 +34,7 @@ export default function HeroSection() {
               <ShinyButton>Version 1.0 is here</ShinyButton>
             </motion.div>
             <motion.h1
-              className="text-4xl sm:text-5xl font-bold text-center mt-5"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mt-5"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -42,7 +42,7 @@ export default function HeroSection() {
               The Crypto of Tomorrow, Today
             </motion.h1>
             <motion.p
-              className="text-xl font-medium text-center mt-5 mb-5"
+              className="md:text-lg lg:text-xl font-medium text-center mt-5 mb-5"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}

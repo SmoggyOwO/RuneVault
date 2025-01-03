@@ -19,7 +19,7 @@ export default function Newsletter() {
 		console.log("submitted");
 	};
 	return (
-		<div className="h-[20rem] flex flex-col justify-center  items-center px-4">
+		<div className="h-[13rem] md:h-[20rem] flex flex-col justify-center  items-center">
 			<h2 className="mb-10 sm:mb-16 text-xl text-center sm:text-4xl dark:text-white text-black">
 				Sign up for our newsletter
 			</h2>

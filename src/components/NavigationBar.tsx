@@ -19,7 +19,7 @@ const scrollToSection = (sectionId: string | null) => {
 
 function SectionLinks() {
   return (
-    <div className="flex gap-8">
+    <div className="hidden md:flex gap-8">
         <div
           className="hover:underline cursor-pointer"
           onClick={() => scrollToSection("about")}
@@ -53,7 +53,7 @@ export default function NavigationBar() {
   const pathname = usePathname();
 
   return (
-    <div className={`${pathname === "/" ? "" : "border"} flex justify-between items-center p-4 px-20 backdrop-blur-[12px] z-10 top-0 left-0 sticky w-full`}>
+    <div className={`${pathname === "/" ? "" : "border"} flex justify-between items-center p-4 md:px-20 backdrop-blur-[12px] z-10 top-0 left-0 sticky w-full`}>
       <RuneIcon />
       {pathname === "/" ? <SectionLinks /> : <div></div>}
       <div>
