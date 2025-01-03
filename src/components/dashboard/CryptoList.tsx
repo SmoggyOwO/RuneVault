@@ -82,9 +82,62 @@ export default function CryptoList({
 
   return (
     <div className="mt-4 border rounded-lg p-4">
-      <div className="text-2xl">Top Cryptocurrencies</div>
+      <div className="hidden md:block text-2xl mb-4">Top Cryptocurrencies</div>
 
-      <div className="overflow-x-auto">
+      {/* Mobile View */}
+      <div className="block md:hidden">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="py-4 text-left">Asset</TableHead>
+              <TableHead className="py-4 text-right">Price</TableHead>
+              <TableHead className="py-4 text-right">Change (24H)</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {filteredCryptos?.map((crypto) => (
+              <TableRow key={crypto.CoinInfo.Id}>
+                <TableCell className="py-4">
+                  <div className="flex items-center gap-3">
+                    <div className="relative h-8 w-8">
+                      <Image
+                        src={`https://www.cryptocompare.com${crypto.CoinInfo.ImageUrl}`}
+                        alt={crypto.CoinInfo.FullName}
+                        fill
+                        className="rounded-full object-contain"
+                      />
+                    </div>
+                    <div>
+                      <div className="font-medium">
+                        {crypto.CoinInfo.FullName}
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        {crypto.CoinInfo.Name}
+                      </div>
+                    </div>
+                  </div>
+                </TableCell>
+                <TableCell className="py-4 text-right">
+                  {crypto.DISPLAY?.USD?.PRICE}
+                </TableCell>
+                <TableCell className="py-4 text-right">
+                  <span
+                    className={getChangeColor(
+                      crypto.DISPLAY?.USD?.CHANGEPCT24HOUR
+                    )}
+                  >
+                    {crypto.DISPLAY?.USD?.CHANGEPCT24HOUR}%
+                  </span>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+
+
+      {/* Desktop View */}
+      <div className="hidden md:block">
         <Table>
           <TableHeader>
             <TableRow>

@@ -63,7 +63,7 @@ export function PortfolioValue() {
       </CardHeader>
       <CardContent>
         <div className="flex flex-col gap-6">
-          <div className="flex items-center justify-between">
+          <div className="md:flex items-center justify-between">
             <div className="space-y-2">
               <div className="text-4xl font-bold">
                 {isFetching ? (
@@ -74,7 +74,7 @@ export function PortfolioValue() {
               </div>
               <div className="text-sm text-gray-500">Updated {timestamp}</div>
             </div>
-            <div className="flex gap-6">
+            <div className="flex mt-3 md:mt-0 gap-6">
               <TransactionButton
                 href="/c/transfer"
                 icon={ArrowDownToLine}
@@ -98,7 +98,7 @@ export default function Portfolio() {
   const session = useSession();
   return (
     <div className="max-w-7xl mx-auto p-6">
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="col-span-2">
           <div className="flex items-center justify-between mb-6">
             <h1 className="text-4xl font-medium">

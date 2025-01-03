@@ -12,7 +12,7 @@ export default function () {
           onChange={(e) => setSearchQuery(e.target.value)}
           type="text"
           placeholder="Search crypto"
-          className="rounded-lg px-4 py-2 border"
+          className="rounded-lg px-4 py-2 border w-1/2 md:w-auto"
         ></input>
       </div>
       <CryptoList searchQuery={searchQuery} limit={100} />

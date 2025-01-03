@@ -14,7 +14,7 @@ export default function RootLayout({
           <NavigationBar />
           <div className="flex">
             <SideBar />
-            <main className="flex-1 p-6">{children}</main>
+            <main className="flex-1 p-6 mb-14 md:mb-0">{children}</main>
           </div>
         </PortfolioProvider>
       </body>
