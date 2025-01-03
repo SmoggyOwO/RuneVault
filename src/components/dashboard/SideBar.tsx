@@ -103,22 +103,19 @@ const SideBar = () => {
 
       {/* Mobile Bottom Navigation */}
       <div 
-        className={`md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 transition-transform duration-300 ${
-          isVisible ? 'translate-y-0' : 'translate-y-full'
-        }`}
-      >
-        <nav className="flex justify-around items-center h-16">
-          {menuItems.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className={`flex flex-col items-center justify-center w-full h-full
-                ${
-                  pathname === item.href
-                    ? "text-black font-semibold"
-                    : "text-gray-600"
-                }`}
-            >
+      className={`z-50 md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 transition-transform duration-300 ${
+        isVisible ? 'translate-y-0' : 'translate-y-full'
+      }`}
+    >
+      <nav className="flex justify-around items-center h-16">
+        {menuItems.map((item) => (
+          <Link
+            key={item.label}
+            href={item.href}
+            className={`flex flex-col items-center justify-center w-full h-full px-1
+              ${pathname === item.href ? "text-black font-semibold" : "text-gray-600"}`}
+          >
+            <div className="flex flex-col items-center min-w-0 w-full">
               <span
                 className={`${
                   pathname === item.href ? "text-black" : "text-gray-400"
@@ -126,15 +123,14 @@ const SideBar = () => {
               >
                 {item.icon}
               </span>
-              <span className="text-xs mt-1">{item.label}</span>
-            </Link>
-          ))}
-        </nav>
-      </div>
-
-      {/* Add padding to prevent content overlap */}
-      <div className="md:hidden h-16"></div>
-    </>
+              <span className="text-xs mt-1 truncate w-full text-center">
+                {item.label}
+              </span>
+            </div>
+          </Link>
+        ))}
+      </nav>
+    </div>    </>
   );
 };
 
