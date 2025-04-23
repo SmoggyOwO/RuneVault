@@ -2,11 +2,16 @@ FROM node:20 AS build
 
 WORKDIR /app
 
-# Install frontend dependencies
-COPY package*.json ./
+# Install pnpm globally
+RUN npm install -g pnpm@9.9.0
+
+# Copy package files first for better caching
+COPY package.json pnpm-lock.yaml* ./
+
+# Install dependencies
 RUN pnpm install
 
-# Copy frontend source code
+# Copy the rest of the application code
 COPY . .
 
 # Build the frontend
@@ -16,7 +21,7 @@ RUN pnpm run build
 FROM nginx:alpine
 
 # Copy the built frontend files to the Nginx container
-COPY --from=build /dist /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
 # Expose port 80 for the frontend
 EXPOSE 80
