@@ -17,13 +17,13 @@ COPY . .
 # Build the frontend
 RUN pnpm run build
 
-# Stage 2: Serve the frontend
-FROM nginx:alpine
+# # Stage 2: Serve the frontend
+# FROM nginx:alpine
 
-# Copy the built frontend files to the Nginx container
-COPY --from=build /app/dist /usr/share/nginx/html
+# # Copy the built frontend files to the Nginx container
+# COPY --from=build /app/dist /usr/share/nginx/html
 
-# Expose port 80 for the frontend
-EXPOSE 80
+# # Expose port 80 for the frontend
+# EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
