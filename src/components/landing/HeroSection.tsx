@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import ShinyButton from "@/components/ui/shiny-button";
 import LoginButton from "@/components/LoginModal";
 import HeroImage from "@public/assets/heroimage.jpg";
+import HeroImage1 from "@public/assets/heroimage1.png";
 import Image from "next/image";
 import LoginModal from "@/components/LoginModal";
 import Link from "next/link";
@@ -18,7 +19,7 @@ export default function HeroSection() {
   });
 
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
-  const imageOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const imageOpacity = useTransform(scrollYProgress, [0, 0.25, 0.5], [1, 0.5, 0]);
 
   return (
     <div ref={containerRef} className="relative">
@@ -78,15 +79,15 @@ export default function HeroSection() {
         <div className="relative w-full pt-[60%] bg-gray-800 rounded-t-xl overflow-hidden shadow-2xl">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/4 h-2 bg-gray-700 rounded-b-lg"></div>
           <motion.div
-            className="absolute inset-2 rounded-lg overflow-hidden bg-white"
-            style={{ scale: imageScale }}
+            className="absolute inset-2 rounded-lg h-1/2 bg-white"
+            style={{ scale: imageScale, paddingTop: `${(680/1020)*100}%` }}
           >
             <Image
-              src={HeroImage}
+              src={HeroImage1}
               alt="Crypto Network Visualization"
-              width={1020}
-              height={680}
-              priority
+              layout="fill"
+        objectFit="cover"
+        priority
             />
           </motion.div>
         </div>
