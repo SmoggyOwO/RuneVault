@@ -1,0 +1,14 @@
+services:
+  frontend:
+    image: runevault:latest
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: runevault
+    ports:
+      - '5173:80'
+    networks:
+      - runevault
+
+networks:
+  runevault:
