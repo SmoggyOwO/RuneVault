@@ -20,6 +20,15 @@ jobs:
           version: 9.9.0
           run_install: false
 
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+          
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -36,6 +45,7 @@ jobs:
           key: ${{ runner.os }}-docker-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-docker-
+            
       - name: Build Docker Images
         run: docker-compose build
 
@@ -57,15 +67,8 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Tag Backend Image
+      - name: Tag Image
         run: docker tag runevault ${{ secrets.DOCKER_USERNAME }}/runevault:latest
 
-      - name: Tag Frontend Image
-        run: docker tag runevault ${{ secrets.DOCKER_USERNAME }}/runevault:latest
-
-
-      - name: Push Backend Image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/runevault:latest
-
-      - name: Push Frontend Image
+      - name: Push Image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/runevault:latest
