@@ -14,10 +14,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Jenkins Integration
-    # - uses: ./jenkins.yml
-        run: echo "::notice::Using local Jenkins configuration from ./jenkins.yml"
-
       - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
@@ -32,6 +28,10 @@ jobs:
           
       - name: Install dependencies
         run: pnpm install
+
+      - name: Jenkins Integration
+      # - uses: ./jenkins.yml
+        run: echo "::notice::Using local Jenkins configuration from ./jenkins.yml"
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
