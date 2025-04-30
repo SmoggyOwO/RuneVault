@@ -4,7 +4,10 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
         IMAGE_NAME = "runevault"
-        DOCKERHUB_REPO = "docker.io/${DOCKERHUB_CREDENTIALS_USR}/runevault"
+        DOCKERHUB_REPO = "docker.io/${DOCKERHUB_CREDENTIALS_USR}/${IMAGE_NAME}"
+        EC2_USER = "ubuntu" // or ec2-user, depending on AMI
+        EC2_HOST = "ec2-xx-xx-xx-xx.compute-1.amazonaws.com"
+        CONTAINER_NAME = "runevault-app"
     }
 
     stages {
@@ -36,11 +39,35 @@ pipeline {
                 sh "docker push ${env.DOCKERHUB_REPO}:latest"
             }
         }
+
+        stage('Deploy to EC2') {
+            steps {
+                echo "Deploying to EC2..."
+
+                sshagent (credentials: ['ec2-ssh-key']) {
+                    sh """
+                        ssh -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} << 'EOF'
+                            echo 'Logging into DockerHub on EC2...'
+                            echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin
+
+                            echo 'Stopping and removing old container (if exists)...'
+                            docker rm -f ${CONTAINER_NAME} || true
+
+                            echo 'Pulling latest image...'
+                            docker pull ${DOCKERHUB_REPO}:latest
+
+                            echo 'Starting new container...'
+                            docker run -d --name ${CONTAINER_NAME} -p 80:80 ${DOCKERHUB_REPO}:latest
+                        EOF
+                    """
+                }
+            }
+        }
     }
 
     post {
         success {
-            echo 'Deployment successful!'
+            echo 'Deployment to EC2 successful!'
         }
         failure {
             echo 'Deployment failed.'
