@@ -32,7 +32,7 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <ShinyButton>Version 2.0 is here</ShinyButton>
+              <ShinyButton>Version 1.0 is here</ShinyButton>
             </motion.div>
             <motion.h1
               className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mt-5"

@@ -65,7 +65,7 @@ export default function () {
       <section id="contact">
         <Newsletter />
       </section>
-      <FooterCredit />
+      {/* <FooterCredit /> */}
       <CreateWallet />
     </div>
   );
