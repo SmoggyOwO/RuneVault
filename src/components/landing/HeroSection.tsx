@@ -83,7 +83,7 @@ export default function HeroSection() {
             style={{ scale: imageScale, paddingTop: `${(680/1020)*100}%` }}
           >
             <Image
-              src={HeroImage1}
+              src={HeroImage}
               alt="Crypto Network Visualization"
               layout="fill"
         objectFit="cover"
