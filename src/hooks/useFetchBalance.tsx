@@ -8,6 +8,7 @@ export function usePortfolioBalance() {
   const [error, setError] = useState("");
   const { data: session } = useSession();
   const [timestamp, setTimestamp] = useState("");
+  const [address, setAddress] = useState("");
 
   const handleGetBalance = useCallback(async () => {
     if (!session?.user?.email) return;
@@ -40,6 +41,7 @@ export function usePortfolioBalance() {
 
       setBalance(data.balance);
       setTimestamp(new Date().toLocaleTimeString());
+      setAddress(data.publicKey);
     } catch (error) {
       setError("Unable to fetch your portfolio balance. Please try again.");
       console.error("Error fetching balance:", error);
@@ -59,5 +61,6 @@ export function usePortfolioBalance() {
     error,
     refetch: handleGetBalance,
     timestamp,
+    address
   };
 }
