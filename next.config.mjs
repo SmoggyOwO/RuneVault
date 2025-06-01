@@ -9,6 +9,21 @@ const nextConfig = {
   images: {
     domains: ["www.cryptocompare.com", "lh3.googleusercontent.com"], // Add allowed domains here
   },
+  async redirects() {
+		return [
+			{
+				source: "/:path*",
+				has: [
+					{
+						type: "host",
+						value: "rune-vault.vercel.app",
+					},
+				],
+				destination: "https://runevault.smoggyowo.tech/:path*",
+				permanent: true,
+			},
+		];
+	},
 };
 
 export default nextConfig;
